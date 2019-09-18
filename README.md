@@ -1,12 +1,7 @@
 # QPCR
 
-Three python scripts aim at calculating the **Delta_Ct, Delta_Delta_Ct, Fold Changes, Student's t-test, and P-value** value which
+Three python scripts aim at calculating the **Delta_Ct, Delta_Delta_Ct, Fold Changes, Student's t-test, and P-value**
 produced by Quantitative real time polymerase chain reaction (qRT-PCR).
-
-### Why
-
-I have too much qpcr data to process. It costs me a lot of time. I want a simple way to do this.
-
 
 ### Compute QPCR results from QPCR output
 Notes:
@@ -16,19 +11,23 @@ Notes:
 3. For **Other machines**, you could use `qpcrCalculate.py` to calculate results with you own data. the Input file format have to be
 exactly the same as **test_interest_data.xls**.
 
-Your should specify **internal control** name and **experimental control** name for your  data sets.
+You should specify **internal control** name and **experimental control** name for your data sets.
 The following file formats are supported: **xls, xlsx, csv, txt**.
 
 ## Dependency
 
-Python2.7 or Python3+
+Python2.7 or Python3+ (I haven't tried this with python2 yet)
 
+python modules:
 * numpy
 * scipy: for t-test
 * pandas
 * matplotlib: for plotting (to do)
 
-### Before use this module, see help
+These can be installed with pip if on mac.
+I am not sure about windows, you might have to use conda to install the modules.
+
+### To get help for each respective module:
 ```bash
     python qpcrRead.py -h
 
@@ -124,17 +123,10 @@ For 3 independent experiments (biological repicates), try:
                             -m stat \
                             -o test/output
 ```
-For -d, you could combined each experiment (input1-3) into one single file.
+For -d, you could combine each experiment (input1-3) into one single file.
 ```bash
     python qpcrCalculate.py -d test/input_combined.xls \
                             -e H9_NT_LSB_D16 \
                             -m stat \
                             -o test/output
 ```
-
-
-
-## To Do List
-
-1. Generate bar or line Plots using Matplotlib automatically
-2. Generate Python Plotting Scripts for customized modification
