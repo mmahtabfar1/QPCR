@@ -1,9 +1,12 @@
 '''
-This script used for calculate delta Ct, delta delta Ct, fold changes and p-values.
-version: 0.1
-date: 2018.05.28
-author: Zhuoqing Fang
+This script is to be used to calculate delta Ct, delta delta Ct, fold changes and p-values.
+date: 2019.09.17
+
+original author: Zhuoqing Fang
 email: fzq518@gmail.com
+
+Forked by: Mahan Mahtabfar
+email: mmahtabfar@ufl.edu
 '''
 
 from __future__ import print_function
@@ -50,7 +53,8 @@ def parse_cli():
     return args
 
 def read_input(args):
-    # checking flies and parameters.
+    # checking files and parameters.
+    # if the input file specified does not exist, the program will terminate.
     if not os.path.exists(args.path):
         print("InputFile: %s doesn't exist, please check your file path!"%args.path)
         sys.exit(1)
@@ -63,6 +67,7 @@ def read_input(args):
         data = pd.read_csv(args.path, comment='#', header=args.head, skipfooter=args.tail)
     elif suffix == 'txt':
         data = pd.read_table(args.path, comment='#', header=args.head, skipfooter=args.tail)
+    # if the file is of an unsupported type the program will call sys.exit
     else:
         print("Unsupported file format input. Please use xls, xlsx. csv, txt format!")
         sys.exit(1)
@@ -334,8 +339,10 @@ def calc_stats(args):
     print('The first 8 rows in your Final results:\n')
     print(t_stat.head(8))
 
+# this is the actual program. everything above was just function definitions which will be called here.
 
 if __name__ == "__main__":
+    # parse the input given through the terminal and print it to confirm with user.
     args = parse_cli()
     print("###########################################")
     print("Input parameters:")
@@ -348,7 +355,7 @@ if __name__ == "__main__":
     print("outFileName      =", args.out)
     print("\n###########################################")
 
-    # run program
+    # run the program
     run(parse_input(args))
     print("\nProgram ran successfully")
     print("Good Job! Cheers!!!")
